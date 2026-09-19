@@ -1,0 +1,26 @@
+{
+  "name": "@beig-rules/jailbreak-machine",
+  "version": "1.0.0",
+  "description": "Jailbreak Machine — host scripts and docs for disposable jailbroken iOS VM on Apple Silicon Mac (not a Linux container).",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": "Beig (Beig-Rules)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beig-Rules/Jailbreak-Machine.git"
+  },
+  "homepage": "https://github.com/Beig-Rules/Jailbreak-Machine#readme",
+  "keywords": ["ios", "jailbreak", "virtualization", "macos", "apple-silicon", "beig-rules"],
+  "files": [
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "docs/**/*",
+    "scripts/**/*"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "os": ["darwin"],
+  "cpu": ["arm64"]
+}
