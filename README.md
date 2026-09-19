@@ -9,153 +9,95 @@
 
 ### What is Jailbreak Machine?
 
-**Jailbreak Machine** lets you spin up a real iOS device as a virtual machine on Apple Silicon Macs using Apple’s own Virtualization.framework.  
-No physical iPhone is needed and there is zero risk to your real device.
+**Jailbreak Machine** is the most complete and practical documentation + usability package for running a real virtual jailbroken iPhone on Apple Silicon Macs.
 
-A single command can handle the full pipeline:
+It is built on top of the powerful original technology from [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli) and focuses on making that technology:
 
-**Download → Patch → DFU Restore → Custom Firmware Install → First Boot**
+- Easy to understand
+- Safe to set up
+- Clear from zero to a working jailbroken VM
+- Professionally documented in both English and Persian
 
-You choose how deep the bypass goes (from near-stock security all the way to a full jailbreak with Sileo + TrollStore pre-installed). After boot you can SSH straight into the device.
+You get a disposable virtual iPhone with selectable jailbreak depth (including full jailbreak + Sileo + TrollStore), SSH/VNC access, and zero risk to any physical device.
 
-This project is a professional documentation, packaging and usability upgrade inspired by the excellent work of [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli).
+### What this repository gives you
 
-### Key Features
+- Complete bilingual guides (English + Persian)
+- Clear recommended path from zero to first boot
+- Variant recommendations
+- Strong troubleshooting
+- Safety notes and checklists
+- Host preflight + helper scripts
+- Architecture and advanced usage docs
+- Honest attribution to the original authors
 
-- One-command VM creation and launch
-- Multiple patch variants (stock → full jailbreak)
-- Automatic Sileo + TrollStore on the strongest variant
-- SSH & VNC access
-- Disposable — delete and recreate anytime
-- Built on official Apple Virtualization.framework
-- Apple Silicon + macOS 15+ only
+### Recommended Workflow (Best Path)
 
-### Requirements
+**1. Read the guides here first** (especially Quick Start + Safety + Troubleshooting)
 
-**Host**
-- Apple Silicon Mac
-- macOS 15 (Sequoia) or later
-- Xcode + iOS SDK
-- SIP / AMFI relaxation (see detailed guide below)
+**2. Build the actual tool from upstream** (this is where the real binary lives):
 
-**Dependencies (Homebrew)**
 ```bash
-brew install python@3.13 aria2 wget gnu-tar openssl@3 ldid-procursus sshpass keystone cmake libusb ipsw zstd
+git clone --recurse-submodules https://github.com/Lakr233/vphone-cli.git
+cd vphone-cli
+./scripts/setup_tools.sh
+./scripts/build.sh
 ```
 
-### Quick Start (Recommended Path)
-
-1. **Prepare the host** (one-time)
-   - Follow the SIP/AMFI section carefully.
-   - Install the Homebrew dependencies above.
-
-2. **Get the tool**
-   ```bash
-   git clone --recurse-submodules https://github.com/Beig-Rules/Jailbreak-Machine.git
-   cd Jailbreak-Machine
-   ./scripts/setup_tools.sh
-   ./scripts/build.sh
-   ```
-
-3. **Create a jailbroken VM**
-   ```bash
-   vphone-cli vm create myphone -V jb
-   ```
-
-4. **Launch it**
-   ```bash
-   vphone-cli vm launch myphone
-   ```
-
-5. **Connect**
-   - SSH (jailbreak): `ssh -p 22222 mobile@<vm-ip>` (password: `alpine`)
-   - VNC: `vnc://<vm-ip>:5901`
-
-### Patch Variants
-
-| Variant | Depth | What you get |
-|---------|-------|--------------|
-| stock / light | Lowest | Closest to normal iOS security |
-| dev | Medium | Development-oriented patches |
-| jb | High | Full jailbreak + Sileo + TrollStore on first boot |
-| exp | Highest | Jailbreak + extra anti-VM-detection research patches |
-
-**Recommendation:** Start with `-V jb` for most users who want a usable jailbroken environment.
-
-### Detailed Step-by-Step Guide
-
-#### 1. Host Preparation (SIP / AMFI)
-
-You must relax SIP/AMFI so the tool can use the required private entitlements.
-
-**Option A – Most permissive (recommended for first-time users)**
-
-In Recovery mode (long-press power button → Terminal):
+**3. Create and launch a jailbroken VM**
 
 ```bash
-csrutil disable
-csrutil allow-research-guests enable
-```
-
-Then reboot into macOS and run:
-
-```bash
-sudo nvram boot-args="amfi_get_out_of_my_way=1 -v"
-```
-
-Reboot again.
-
-**Option B – Keep more of SIP enabled**
-
-See the original project documentation for the `amfidont` allowlist method.
-
-#### 2. Build
-
-```bash
-git clone --recurse-submodules https://github.com/Beig-Rules/Jailbreak-Machine.git
-cd Jailbreak-Machine
-./scripts/setup_tools.sh      # deps + toolchain + Python venv
-./scripts/build.sh            # build & sign
-```
-
-#### 3. Create & Launch
-
-```bash
-# Full automated pipeline with jailbreak variant
 vphone-cli vm create myphone -V jb
-
-# Boot the VM
 vphone-cli vm launch myphone
 ```
 
-#### 4. Useful Management Commands
+**4. Connect**
 
 ```bash
-vphone-cli vm list
-vphone-cli vm info myphone
-vphone-cli vm clone myphone myphone-2
-vphone-cli vm export myphone --out myphone.tzst
-vphone-cli vm delete myphone
+ssh -p 22222 mobile@<vm-ip>     # password: alpine
 ```
 
-### Troubleshooting (Most Common Issues)
+VNC: `vnc://<vm-ip>:5901`
 
-| Problem | Solution |
-|---------|----------|
-| `zsh: killed ./vphone-cli` | SIP/AMFI not properly relaxed |
-| Virtualization not available | You are inside a nested VM — use a real Mac host |
-| Stuck on “Press home to continue” | Connect via VNC and right-click / two-finger click |
-| Large apps crash (CODESIGNING / Invalid Page) | Known limitation with very large binaries; see original issues |
-| System apps won’t install | Avoid Japan / EU region during initial setup |
-| Network issues when host uses VPN | Known limitation — try disabling host VPN |
+### Requirements
 
-### Data Locations
+- Apple Silicon Mac (physical, not nested)
+- macOS 15+
+- Xcode
+- SIP/AMFI relaxation (see docs)
+- Homebrew dependencies listed in the guides
 
-Everything is stored under `~/.vphone/` (override with `$VPHONE_ROOT`):
+### Patch Variants
 
-- `~/.vphone/VMs/` — your virtual devices
-- `~/.vphone/ipsws/` — downloaded firmwares
-- `~/.vphone/debs/` — jailbreak packages cache
+| Variant | Recommendation | Result |
+|---------|----------------|--------|
+| stock / light | Only if you need near-stock | Lowest bypass |
+| dev | Development | Medium |
+| **jb** | **Start here** | Full jailbreak + Sileo + TrollStore |
+| exp | Advanced research only | Maximum patches + anti-VM research |
+
+### Documentation Map
+
+| File | Purpose |
+|------|---------|
+| [docs/QUICKSTART.md](docs/QUICKSTART.md) | Fastest path to a running VM |
+| [docs/QUICKSTART.fa.md](docs/QUICKSTART.fa.md) | همان راهنما به فارسی |
+| [docs/VARIANTS.md](docs/VARIANTS.md) | Which variant to choose |
+| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | Common failures and fixes |
+| [docs/TROUBLESHOOTING.fa.md](docs/TROUBLESHOOTING.fa.md) | رفع مشکلات به فارسی |
+| [docs/SAFETY.md](docs/SAFETY.md) | Host security & responsibility |
+| [docs/CHECKLIST.md](docs/CHECKLIST.md) | Pre-flight checklist |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | How the system works |
+| [docs/ADVANCED.md](docs/ADVANCED.md) | Manual pipeline, clone, export, tuning |
+| [docs/FAQ.md](docs/FAQ.md) | Frequent questions |
+| [NOTICE.md](NOTICE.md) | Upstream relationship |
+
+### Helper Scripts
+
+```bash
+./scripts/host-preflight.sh          # basic host checks
+./scripts/recommended-create.sh      # opinionated vm create wrapper
+```
 
 ---
 
@@ -163,144 +105,85 @@ Everything is stored under `~/.vphone/` (override with `$VPHONE_ROOT`):
 
 ### Jailbreak Machine چیست؟
 
-**Jailbreak Machine** به شما امکان می‌دهد یک دستگاه iOS واقعی را به صورت ماشین مجازی روی مک‌های Apple Silicon اجرا کنید.  
-از Virtualization.framework رسمی اپل استفاده می‌کند. نیازی به آیفون فیزیکی نیست و هیچ خطری برای دستگاه واقعی شما ندارد.
+**Jailbreak Machine** کامل‌ترین و کاربردی‌ترین بسته مستندات و تجربه کاربری برای اجرای آیفون جیلبریک‌شده مجازی روی مک‌های Apple Silicon است.
 
-یک دستور می‌تواند کل فرآیند را انجام دهد:
+این پروژه روی فناوری قدرتمند اصلی [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli) ساخته شده و تمرکز آن روی این است که آن فناوری:
 
-**دانلود → پچ → DFU Restore → نصب فریمور سفارشی → بوت اول**
+- قابل فهم باشد
+- با خیال راحت راه‌اندازی شود
+- از صفر تا VM جیلبریک‌شده شفاف باشد
+- به صورت حرفه‌ای به دو زبان فارسی و انگلیسی مستند شود
 
-شما سطح دور زدن امنیت را انتخاب می‌کنید (از نزدیک به حالت عادی تا جیلبریک کامل با نصب خودکار Sileo و TrollStore). بعد از بوت می‌توانید مستقیماً با SSH وارد دستگاه شوید.
+شما یک آیفون مجازی یک‌بارمصرف با عمق جیلبریک قابل انتخاب (از جمله جیلبریک کامل + Sileo + TrollStore)، دسترسی SSH/VNC و بدون هیچ خطری برای دستگاه واقعی دریافت می‌کنید.
 
-این پروژه یک ارتقاء حرفه‌ای از نظر مستندات، تجربه کاربری و بسته‌بندی است که از کار عالی [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli) الهام گرفته.
+### مسیر پیشنهادی (بهترین روش)
 
-### ویژگی‌های کلیدی
+**۱. اول راهنماهای همین مخزن را بخوانید**
 
-- ساخت و اجرای VM با یک دستور
-- چندین سطح پچ (از stock تا جیلبریک کامل)
-- نصب خودکار Sileo + TrollStore در قوی‌ترین حالت
-- دسترسی SSH و VNC
-- کاملاً یک‌بارمصرف و قابل حذف
-- مبتنی بر Virtualization.framework رسمی اپل
-- فقط Apple Silicon + macOS 15 به بالا
-
-### پیش‌نیازها
-
-**سیستم میزبان**
-- مک با پردازنده Apple Silicon
-- macOS 15 (Sequoia) یا جدیدتر
-- Xcode + iOS SDK
-- تنظیمات SIP / AMFI (در راهنمای کامل توضیح داده شده)
-
-**وابستگی‌ها (Homebrew)**
-```bash
-brew install python@3.13 aria2 wget gnu-tar openssl@3 ldid-procursus sshpass keystone cmake libusb ipsw zstd
-```
-
-### شروع سریع (مسیر پیشنهادی)
-
-1. **آماده‌سازی میزبان** (یک‌بار)
-   - بخش SIP/AMFI را با دقت انجام دهید.
-   - وابستگی‌های Homebrew را نصب کنید.
-
-2. **دریافت ابزار**
-   ```bash
-   git clone --recurse-submodules https://github.com/Beig-Rules/Jailbreak-Machine.git
-   cd Jailbreak-Machine
-   ./scripts/setup_tools.sh
-   ./scripts/build.sh
-   ```
-
-3. **ساخت VM جیلبریک‌شده**
-   ```bash
-   vphone-cli vm create myphone -V jb
-   ```
-
-4. **اجرا**
-   ```bash
-   vphone-cli vm launch myphone
-   ```
-
-5. **اتصال**
-   - SSH (جیلبریک): `ssh -p 22222 mobile@<vm-ip>` (رمز: `alpine`)
-   - VNC: `vnc://<vm-ip>:5901`
-
-### واریانت‌های پچ
-
-| واریانت | عمق | نتیجه |
-|---------|-----|-------|
-| stock / light | کم | نزدیک به امنیت عادی iOS |
-| dev | متوسط | مناسب توسعه |
-| jb | بالا | جیلبریک کامل + Sileo + TrollStore |
-| exp | خیلی بالا | جیلبریک + پچ‌های ضد تشخیص VM |
-
-**پیشنهاد:** برای اکثر کاربران با `-V jb` شروع کنید.
-
-### راهنمای قدم‌به‌قدم کامل
-
-#### ۱. آماده‌سازی میزبان (SIP / AMFI)
-
-باید SIP/AMFI را شل کنید تا ابزار بتواند از entitlementهای خصوصی استفاده کند.
-
-**روش A – ساده‌ترین و بازترین (پیشنهادی برای شروع)**
-
-در حالت Recovery (نگه داشتن دکمه پاور → Terminal):
+**۲. ابزار اصلی را از upstream بیلد کنید:**
 
 ```bash
-csrutil disable
-csrutil allow-research-guests enable
-```
-
-سپس به macOS برگردید و اجرا کنید:
-
-```bash
-sudo nvram boot-args="amfi_get_out_of_my_way=1 -v"
-```
-
-دوباره ریبوت کنید.
-
-#### ۲. بیلد
-
-```bash
-git clone --recurse-submodules https://github.com/Beig-Rules/Jailbreak-Machine.git
-cd Jailbreak-Machine
+git clone --recurse-submodules https://github.com/Lakr233/vphone-cli.git
+cd vphone-cli
 ./scripts/setup_tools.sh
 ./scripts/build.sh
 ```
 
-#### ۳. ساخت و اجرا
+**۳. VM جیلبریک‌شده بسازید و اجرا کنید:**
 
 ```bash
 vphone-cli vm create myphone -V jb
 vphone-cli vm launch myphone
 ```
 
-### رفع مشکلات رایج
+**۴. وصل شوید:**
 
-| مشکل | راه‌حل |
-|------|--------|
-| `zsh: killed` | SIP/AMFI درست تنظیم نشده |
-| Virtualization در دسترس نیست | داخل VM تودرتو هستید — از مک واقعی استفاده کنید |
-| گیر کردن روی «Press home to continue» | با VNC وصل شوید و کلیک راست / دو انگشتی بزنید |
-| کرش اپ‌های بزرگ | محدودیت شناخته‌شده با باینری‌های خیلی بزرگ |
-| مشکل شبکه وقتی VPN روی هاست فعال است | VPN هاست را موقتاً خاموش کنید |
+```bash
+ssh -p 22222 mobile@<vm-ip>     # رمز: alpine
+```
+
+### واریانت پیشنهادی
+
+برای اکثر کاربران: **`-V jb`**
 
 ---
 
-## Attribution & Copyright / اعتبار و کپی‌رایت
+## Project Structure
 
-This project is a professional documentation, packaging and usability upgrade inspired by the outstanding work of:
+```
+Jailbreak-Machine/
+├── README.md
+├── LICENSE
+├── NOTICE.md
+├── docs/
+│   ├── QUICKSTART.md / QUICKSTART.fa.md
+│   ├── VARIANTS.md
+│   ├── TROUBLESHOOTING.md / TROUBLESHOOTING.fa.md
+│   ├── SAFETY.md
+│   ├── CHECKLIST.md
+│   ├── ARCHITECTURE.md
+│   ├── ADVANCED.md
+│   ├── FAQ.md
+│   └── UPSTREAM.md
+└── scripts/
+    ├── host-preflight.sh
+    └── recommended-create.sh
+```
 
-**Original project:** [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli)  
-All credit for the core technology, Virtualization.framework integration, patching pipeline, and jailbreak variants belongs to Lakr233 and contributors.
+---
 
-**This upgraded edition (Jailbreak Machine)**  
+## Attribution & Copyright
+
+**Core technology:** [Lakr233/vphone-cli](https://github.com/Lakr233/vphone-cli)  
+All credit for the Virtualization.framework integration, patching pipeline, jailbreak variants, and original research belongs to Lakr233 and contributors.
+
+**This package (Jailbreak Machine)**  
 Copyright © 2026 Beig (Beig-Rules)  
-Published under the MIT License.
+MIT License
 
-The goal of this repository is to make the powerful original tool easier to understand, safer to set up, and more approachable for both researchers and power users, while fully preserving attribution to the original authors.
+This repository exists to make the original powerful tool dramatically more usable, clearer, and safer to adopt — while keeping full and visible credit to the upstream authors.
 
 ---
 
-**ساخته‌شده برای استفاده کاربردی، شفاف و بدون دردسر از آیفون جیلبریک‌شده مجازی**  
-**Built to make virtual jailbroken iPhones practical, clear, and ready to use**
+**کامل‌ترین لایه مستندات و تجربه کاربری برای آیفون جیلبریک‌شده مجازی**  
+**The most complete documentation and usability layer for virtual jailbroken iPhones**
