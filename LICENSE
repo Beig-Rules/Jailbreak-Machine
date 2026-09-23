@@ -1,22 +1,110 @@
-Copyright (c) 2025–2026 Beig-Rules (Beig). All Rights Reserved.
+Copyright (c) 2025–2026 Beig-Rules (Beig) / Big Flow. All Rights Reserved.
 
-PROPRIETARY SOFTWARE LICENSE — EXCLUSIVE OWNERSHIP
+================================================================================
+BEIG-RULES PROPRIETARY SOFTWARE LICENSE
+EXCLUSIVE OWNERSHIP — NO OPEN-SOURCE GRANT
+================================================================================
 
-Original work in this repository under the Beig-Rules account ("Software")
-is the exclusive property of Beig-Rules ("Owner").
+IMPORTANT NOTICE
+This repository and all materials herein are proprietary intellectual property.
+Publication on GitHub (public or private) does NOT grant any license, permission,
+or right to use, copy, fork, modify, distribute, commercialize, or create
+derivative works. Viewing source code is not a grant of rights.
 
-No license is granted except by separate written agreement signed by the Owner.
-You may not use, copy, modify, publish, distribute, sublicense, sell, host,
-or otherwise exploit the Owner's original Software without prior written permission.
+1. DEFINITIONS
+   "Software" means all source code, object code, scripts, notebooks, designs,
+   UI systems (including the Minimal Mono design signature), documentation,
+   data files, schemas, workflows, configurations, trademarks, trade dress,
+   and any other materials in this repository or distributed under the
+   Beig-Rules account, including updates and future versions.
+   "Owner" means Beig-Rules (GitHub user Beig-Rules), also associated with
+   Big Flow, and any successor rights holders.
+   "You" means any person or entity accessing, viewing, cloning, or using
+   the Software without a separate written license from the Owner.
 
-Public visibility on GitHub does not grant any usage rights.
+2. OWNERSHIP
+   The Software is and remains the exclusive property of the Owner.
+   No title or ownership interest is transferred by access to this repository.
 
-UPSTREAM / INSPIRATION: Portions may be inspired by third-party work. Those
-components remain subject to their original authors' licenses where applicable.
-Beig-Rules original contributions remain proprietary under this license.
+3. NO LICENSE GRANTED
+   Except as expressly set forth in a separate written agreement signed by
+   an authorized representative of the Owner, NO license of any kind is
+   granted under copyright, patent, trademark, trade secret, or any other
+   intellectual property right. All rights not expressly granted are reserved.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND.
-All rights reserved.
+4. PROHIBITED CONDUCT (without prior written permission)
+   You may NOT, directly or indirectly:
+   (a) copy, reproduce, clone, download for redistribution, or mirror the Software;
+   (b) fork, publish, or host the Software or substantial portions thereof
+       (including public GitHub forks) as your own product or open-source project;
+   (c) modify, adapt, translate, reverse engineer, decompile, or create
+       derivative works based on the Software;
+   (d) sell, rent, lease, sublicense, assign, or commercially exploit the Software;
+   (e) remove, obscure, or alter any copyright, license, NOTICE, or proprietary
+       markings;
+   (f) use the Software name, branding, design system, or distinctive UI as
+       your own product identity;
+   (g) use the Software to provide competing commercial services without
+       authorization.
 
-Contact: GitHub Beig-Rules
-SPDX-License-Identifier: LicenseRef-BeigRules-Proprietary
+5. FORKS AND UNAUTHORIZED COPIES
+   Any unauthorized fork, mirror, or copy is a material breach and an
+   infringement of the Owner's rights. The Owner may demand immediate
+   takedown, deletion of all copies, and cessation of use. Continued
+   infringement after notice constitutes willful violation.
+
+6. LIABILITY, DAMAGES, AND ENFORCEMENT
+   Unauthorized use, copying, forking, distribution, or commercial
+   exploitation may subject You to:
+   (a) civil claims for copyright infringement and related remedies;
+   (b) injunctive relief (court orders to stop use and remove materials);
+   (c) monetary damages, including actual damages, statutory damages where
+       available, disgorgement of profits, and recovery of costs and
+       reasonable attorneys' fees to the fullest extent permitted by law;
+   (d) any other remedies available under applicable law.
+
+   THE OWNER WILL PURSUE VIOLATIONS. Any person or entity that uses the
+   Software outside the law and without written permission may be held
+   liable to compensate the Owner for all resulting harm, losses, and
+   enforcement costs. You are strongly advised to comply with applicable
+   intellectual property and computer laws and to obtain written permission
+   before any use beyond mere viewing.
+
+7. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITHOUT WARRANTY OF
+   ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND
+   NON-INFRINGEMENT. THE OWNER SHALL NOT BE LIABLE FOR ANY INDIRECT,
+   INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM
+   ACCESS TO OR INABILITY TO USE THE SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGES, TO THE MAXIMUM EXTENT PERMITTED BY LAW.
+
+8. THIRD-PARTY AND UPSTREAM MATERIALS
+   If the Software references or includes third-party components, those
+   components remain subject to their original licenses. Inspiration from
+   other projects does not transfer rights in the Owner's original work.
+   All original contributions by Beig-Rules remain under this proprietary
+   license exclusively.
+
+9. TERMINATION
+    Any unauthorized use terminates any implied or purported permission
+    immediately. Upon termination or demand, You must destroy all copies
+    of the Software in your possession or control.
+
+10. GOVERNING PRINCIPLES
+    This notice is intended to maximize protection of the Owner's exclusive
+    rights. If any provision is held unenforceable, the remainder stays in
+    effect. Failure to enforce a right is not a waiver of that right.
+
+11. PERMISSION REQUESTS
+    For commercial licensing, permitted forks, or other authorization,
+    contact the Owner via the GitHub account: Beig-Rules.
+
+12. ACKNOWLEDGMENT
+    By accessing this repository You acknowledge that You have read this
+    license, understand that the Software is proprietary and exclusive to
+    the Owner, and agree that unauthorized use may result in legal action
+    and liability for damages.
+
+SPDX-License-Identifier: LicenseRef-BeigRules-Proprietary-Exclusive
+Effective: 2026-09-23
